@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-md-10 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="bi bi-file-medical"></i> Nueva Receta Médica</h4>
+            </div>
+            <div class="card-body">
+                <% if (typeof error !== 'undefined' && error) { %>
+                    <div class="alert alert-danger"><%= error %></div>
+                <% } %>
+                
+                <form action="/recipes" method="POST">
+                    <div class="mb-3">
+                        <label for="paciente_id" class="form-label">Paciente *</label>
+                        <select class="form-select" id="paciente_id" name="paciente_id" required>
+                            <option value="">Seleccione un paciente</option>
+                            <% if (pacientes && pacientes.length > 0) { %>
+                                <% pacientes.forEach(paciente => { %>
+                                    <option value="<%= paciente.id %>">
+                                        <%= paciente.nombre %> <%= paciente.apellido %> - <%= paciente.cedula %>
+                                    </option>
+                                <% }); %>
+                            <% } %>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="diagnostico" class="form-label">Diagnóstico *</label>
+                        <textarea class="form-control" id="diagnostico" name="diagnostico" rows="4" required 
+                                  placeholder="Describa el diagnóstico del paciente..."><%= recipe ? recipe.diagnostico : '' %></textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="medicamentos" class="form-label">Medicamentos Recetados</label>
+                        <textarea class="form-control" id="medicamentos" name="medicamentos" rows="5" 
+                                  placeholder="Lista de medicamentos:
+- Medicamento 1: Dosis, frecuencia
+- Medicamento 2: Dosis, frecuencia"><%= recipe ? recipe.medicamentos : '' %></textarea>
+                        <small class="text-muted">Incluya nombre del medicamento, dosis y frecuencia de administración</small>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="indicaciones" class="form-label">Indicaciones Adicionales</label>
+                        <textarea class="form-control" id="indicaciones" name="indicaciones" rows="4" 
+                                  placeholder="Instrucciones para el paciente, recomendaciones, seguimiento..."><%= recipe ? recipe.indicaciones : '' %></textarea>
+                    </div>
+                    
+                    <div class="text-end">
+                        <a href="/recipes" class="btn btn-secondary">Cancelar</a>
+                        <button type="submit" class="btn btn-primary">Guardar Receta</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
