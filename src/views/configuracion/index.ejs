@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0"><i class="bi bi-gear"></i> Configuración del Consultorio</h4>
+            </div>
+            <div class="card-body">
+                <% if (typeof error !== 'undefined' && error) { %>
+                    <div class="alert alert-danger"><%= error %></div>
+                <% } %>
+                
+                <% if (typeof success !== 'undefined' && success) { %>
+                    <div class="alert alert-success">Configuración actualizada correctamente</div>
+                <% } %>
+                
+                <form action="/configuracion?_method=PUT" method="POST">
+                    <div class="mb-3">
+                        <label for="doctor_nombre" class="form-label">Nombre del Doctor *</label>
+                        <input type="text" class="form-control" id="doctor_nombre" name="doctor_nombre" required 
+                               value="<%= config.doctor_nombre || '' %>">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="numero_colegiado" class="form-label">Número de Colegiado *</label>
+                        <input type="text" class="form-control" id="numero_colegiado" name="numero_colegiado" required 
+                               value="<%= config.numero_colegiado || '' %>">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="rif" class="form-label">RIF *</label>
+                        <input type="text" class="form-control" id="rif" name="rif" required 
+                               value="<%= config.rif || '' %>">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Correo Electrónico *</label>
+                        <input type="email" class="form-control" id="email" name="email" required 
+                               value="<%= config.email || '' %>">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input type="tel" class="form-control" id="telefono" name="telefono" 
+                               value="<%= config.telefono || '' %>">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="direccion" class="form-label">Dirección</label>
+                        <textarea class="form-control" id="direccion" name="direccion" rows="3"><%= config.direccion || '' %></textarea>
+                    </div>
+                    
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-save"></i> Guardar Cambios
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
