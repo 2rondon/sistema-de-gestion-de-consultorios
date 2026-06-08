@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-people"></i> Pacientes</h2>
+    <a href="/pacientes/create" class="btn btn-primary">
+        <i class="bi bi-person-plus"></i> Nuevo Paciente
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Cédula</th>
+                        <th>Teléfono</th>
+                        <th>Email</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (pacientes && pacientes.length > 0) { %>
+                        <% pacientes.forEach(paciente => { %>
+                            <tr>
+                                <td><%= paciente.id %></td>
+                                <td><%= paciente.nombre %></td>
+                                <td><%= paciente.apellido %></td>
+                                <td><%= paciente.cedula %></td>
+                                <td><%= paciente.telefono || '-' %></td>
+                                <td><%= paciente.email || '-' %></td>
+                                <td>
+                                    <a href="/pacientes/<%= paciente.id %>/edit" class="btn btn-sm btn-warning">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <form action="/pacientes/<%= paciente.id %>?_method=DELETE" method="POST" style="display: inline;">
+                                        <button type="submit" class="btn btn-sm btn-danger delete-confirm">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="7" class="text-center">No hay pacientes registrados</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
