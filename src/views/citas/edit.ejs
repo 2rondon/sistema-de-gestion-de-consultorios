@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="bi bi-pencil"></i> Editar Cita</h4>
+            </div>
+            <div class="card-body">
+                <form action="/citas/<%= cita.id %>?_method=PUT" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">Paciente</label>
+                        <input type="text" class="form-control" value="<%= cita.nombre %> <%= cita.apellido %>" disabled>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="fecha" class="form-label">Fecha *</label>
+                            <input type="date" class="form-control" id="fecha" name="fecha" required value="<%= cita.fecha %>">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="hora" class="form-label">Hora *</label>
+                            <input type="time" class="form-control" id="hora" name="hora" required value="<%= cita.hora %>">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="motivo" class="form-label">Motivo de la consulta</label>
+                        <textarea class="form-control" id="motivo" name="motivo" rows="3"><%= cita.motivo || '' %></textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="estado" class="form-label">Estado</label>
+                        <select class="form-select" id="estado" name="estado">
+                            <option value="pendiente" <%= cita.estado === 'pendiente' ? 'selected' : '' %>>Pendiente</option>
+                            <option value="confirmada" <%= cita.estado === 'confirmada' ? 'selected' : '' %>>Confirmada</option>
+                            <option value="completada" <%= cita.estado === 'completada' ? 'selected' : '' %>>Completada</option>
+                            <option value="cancelada" <%= cita.estado === 'cancelada' ? 'selected' : '' %>>Cancelada</option>
+                        </select>
+                    </div>
+                    
+                    <div class="text-end">
+                        <a href="/citas" class="btn btn-secondary">Cancelar</a>
+                        <button type="submit" class="btn btn-primary">Actualizar Cita</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
