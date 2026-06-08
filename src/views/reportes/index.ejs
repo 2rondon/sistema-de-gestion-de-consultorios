@@ -1,0 +1,307 @@
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2><i class="bi bi-graph-up"></i> Reportes y Estadísticas</h2>
+            <div>
+                <button onclick="window.open('/reportes/pacientes-pdf', '_blank')" class="btn btn-success me-2">
+    <i class="bi bi-file-earmark-pdf"></i> Reporte Completo de Pacientes
+</button>
+            </div>
+        </div>
+        <hr>
+    </div>
+</div>
+
+<!-- Cards de estadísticas -->
+<div class="row mb-4" id="cardsEstadisticas">
+    <div class="col-md-3 mb-3">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h5 class="card-title">Total Pacientes</h5>
+                <h2 class="mb-0"><%= stats.total_pacientes || 0 %></h2>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3 mb-3">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <h5 class="card-title">Total Citas</h5>
+                <h2 class="mb-0"><%= stats.total_citas || 0 %></h2>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3 mb-3">
+        <div class="card bg-info text-white">
+            <div class="card-body">
+                <h5 class="card-title">Citas Completadas</h5>
+                <h2 class="mb-0"><%= stats.citas_completadas || 0 %></h2>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3 mb-3">
+        <div class="card bg-warning text-white">
+            <div class="card-body">
+                <h5 class="card-title">Citas Pendientes</h5>
+                <h2 class="mb-0"><%= stats.citas_pendientes || 0 %></h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Top pacientes -->
+<div class="row">
+    <div class="col-md-12 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Top 10 Pacientes más Activos</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover" id="tablaPacientes">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Paciente</th>
+                                <th>Total Citas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (topPacientes && topPacientes.length > 0) { %>
+                                <% topPacientes.forEach((paciente, index) => { %>
+                                    <tr>
+                                        <td><%= index + 1 %></td>
+                                        <td><%= paciente.nombre %> <%= paciente.apellido %></td>
+                                        <td><%= paciente.total_citas %></td>
+                                    </tr>
+                                <% }); %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="3" class="text-center">No hay datos disponibles</td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Estilos para impresión de solo la tabla -->
+<style>
+    /* Estilos para impresión normal */
+    @media print {
+        /* Ocultar todo por defecto */
+        body * {
+            visibility: hidden;
+        }
+        
+        /* Mostrar solo la tabla y su contenido */
+        .tabla-para-imprimir, .tabla-para-imprimir * {
+            visibility: visible;
+        }
+        
+        /* Posicionar la tabla en el centro */
+        .tabla-para-imprimir {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            margin: 0 auto;
+        }
+        
+        /* Ocultar botones y elementos no deseados */
+        .btn, .navbar, .sidebar, .dropdown, .card-header .btn,
+        button, .btn-danger, .btn-secondary {
+            display: none !important;
+        }
+        
+        /* Estilos para la tabla en impresión */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        
+        .fecha-impresion {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #666;
+        }
+    }
+</style>
+
+<script>
+function imprimirSoloTabla() {
+    // Clonar la tabla para no afectar la original
+    const tablaOriginal = document.getElementById('tablaPacientes');
+    const tablaClone = tablaOriginal.cloneNode(true);
+    
+    // Crear un contenedor para la impresión
+    const contenedor = document.createElement('div');
+    contenedor.className = 'tabla-para-imprimir';
+    
+    // Agregar título
+    const titulo = document.createElement('h2');
+    titulo.textContent = 'Lista de Pacientes más Activos';
+    titulo.style.textAlign = 'center';
+    titulo.style.marginBottom = '20px';
+    titulo.style.color = '#333';
+    
+    // Agregar fecha
+    const fecha = document.createElement('div');
+    fecha.className = 'fecha-impresion';
+    fecha.innerHTML = `📅 Fecha de generación: ${new Date().toLocaleString()}`;
+    fecha.style.marginBottom = '20px';
+    fecha.style.color = '#666';
+    fecha.style.textAlign = 'center';
+    
+    // Agregar pie de página
+    const footer = document.createElement('div');
+    footer.style.textAlign = 'center';
+    footer.style.marginTop = '30px';
+    footer.style.paddingTop = '20px';
+    footer.style.borderTop = '1px solid #ddd';
+    footer.style.color = '#666';
+    footer.style.fontSize = '12px';
+    footer.innerHTML = `
+        <p>Reporte generado automáticamente por el Sistema de Administración de Consultorios Médicos</p>
+        <p>© ${new Date().getFullYear()} - Todos los derechos reservados</p>
+    `;
+    
+    // Ensamblar todo
+    contenedor.appendChild(titulo);
+    contenedor.appendChild(fecha);
+    contenedor.appendChild(tablaClone);
+    contenedor.appendChild(footer);
+    
+    // Agregar estilos adicionales a la tabla clonada
+    const style = document.createElement('style');
+    style.textContent = `
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    `;
+    contenedor.appendChild(style);
+    
+    // Agregar al body temporalmente
+    document.body.appendChild(contenedor);
+    
+    // Forzar la impresión
+    window.print();
+    
+    // Remover el contenedor después de imprimir
+    setTimeout(() => {
+        document.body.removeChild(contenedor);
+    }, 100);
+}
+
+// Alternativa aún más simple - Usar el mismo método que "Imprimir Todo"
+function imprimirSoloTablaSimple() {
+    // Agregar una clase especial al body para la impresión
+    document.body.classList.add('imprimir-solo-tabla');
+    
+    // Imprimir
+    window.print();
+    
+    // Remover la clase después de imprimir
+    setTimeout(() => {
+        document.body.classList.remove('imprimir-solo-tabla');
+    }, 100);
+}
+
+// Agregar estilos para la impresión de solo tabla
+const estilosImpresion = document.createElement('style');
+estilosImpresion.textContent = `
+    @media print {
+        /* Cuando la clase 'imprimir-solo-tabla' está presente en el body */
+        body.imprimir-solo-tabla * {
+            visibility: hidden !important;
+        }
+        
+        body.imprimir-solo-tabla #tablaPacientes,
+        body.imprimir-solo-tabla #tablaPacientes *,
+        body.imprimir-solo-tabla .card:has(#tablaPacientes),
+        body.imprimir-solo-tabla .card:has(#tablaPacientes) * {
+            visibility: visible !important;
+        }
+        
+        body.imprimir-solo-tabla .card:has(#tablaPacientes) {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            width: auto;
+            margin: 0;
+            padding: 20px;
+            box-shadow: none;
+            border: 1px solid #ddd;
+        }
+        
+        body.imprimir-solo-tabla .btn,
+        body.imprimir-solo-tabla .navbar,
+        body.imprimir-solo-tabla .sidebar,
+        body.imprimir-solo-tabla .dropdown,
+        body.imprimir-solo-tabla .row:first-child {
+            display: none !important;
+        }
+        
+        /* Agregar título y fecha automáticamente */
+        body.imprimir-solo-tabla .card:has(#tablaPacientes)::before {
+            content: "Lista de Pacientes más Activos";
+            display: block;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        body.imprimir-solo-tabla .card:has(#tablaPacientes)::after {
+            content: "📅 Fecha: ${new Date().toLocaleString()}";
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #666;
+            font-size: 12px;
+        }
+    }
+`;
+document.head.appendChild(estilosImpresion);
+</script>
