@@ -1,44 +1,104 @@
-<div class="row justify-content-center mt-5">
+<div class="row justify-content-center min-vh-100 align-items-center">
     <div class="col-md-6 col-lg-5">
-        <div class="card shadow">
-            <div class="card-header bg-primary text-white">
-                <h4 class="mb-0"><i class="bi bi-box-arrow-in-right"></i> Iniciar Sesión</h4>
+        <!-- Card principal de login -->
+        <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+            <!-- Cabecera con gradiente -->
+            <div class="card-header border-0 text-white text-center py-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                <i class="bi bi-hospital fs-1"></i>
+                <h3 class="mt-2 mb-0 fw-bold">Consultorio Médico</h3>
+                <p class="mb-0 opacity-75 small">Sistema de Administración</p>
             </div>
-            <div class="card-body">
+            
+            <div class="card-body p-4">
                 <% if (typeof error !== 'undefined' && error) { %>
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <%= error %>
+                    <div class="alert alert-danger alert-dismissible fade show rounded-3" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i> <%= error %>
                         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     </div>
                 <% } %>
                 
                 <form action="/auth/login" method="POST">
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Correo Electrónico</label>
-                        <input type="email" class="form-control" id="email" name="email" required autofocus>
+                    <div class="mb-4">
+                        <label for="email" class="form-label fw-semibold">
+                            <i class="bi bi-envelope-fill me-1"></i> Correo Electrónico
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text border-end-0 bg-white">
+                                <i class="bi bi-envelope text-secondary"></i>
+                            </span>
+                            <input type="email" class="form-control border-start-0 ps-0" 
+                                   id="email" name="email" 
+                                   placeholder="usuario@ejemplo.com" 
+                                   required autofocus>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
+                    
+                    <div class="mb-4">
+                        <label for="password" class="form-label fw-semibold">
+                            <i class="bi bi-lock-fill me-1"></i> Contraseña
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text border-end-0 bg-white">
+                                <i class="bi bi-key text-secondary"></i>
+                            </span>
+                            <input type="password" class="form-control border-start-0 ps-0" 
+                                   id="password" name="password" 
+                                   placeholder="Ingresa tu contraseña" 
+                                   required>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+                    
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" type="checkbox" id="remember">
+                        <label class="form-check-label" for="remember">
+                            Recordarme
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary w-100 py-2 fw-bold rounded-3" 
+                            style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none;">
+                        <i class="bi bi-box-arrow-in-right me-2"></i> Iniciar Sesión
+                    </button>
                 </form>
                 
-                <hr>
-                <p class="text-center mb-0">
-                    ¿No tienes cuenta? <a href="/auth/register">Regístrate aquí</a>
-                </p>
+                <div class="text-center mt-4">
+                    <a href="/auth/register" class="text-decoration-none">
+                        <i class="bi bi-person-plus"></i> ¿No tienes cuenta? Regístrate
+                    </a>
+                </div>
             </div>
         </div>
         
-        <div class="card mt-3 bg-light">
-            <div class="card-body">
-                <small class="text-muted">
-                    <strong>Credenciales de prueba:</strong><br>
-                    Email: admin@consultorio.com<br>
-                    Password: admin123
-                </small>
-            </div>
-        </div>
-    </div>
-</div>
+
+<style>
+.min-vh-100 {
+    min-height: 100vh;
+}
+
+.form-control:focus {
+    border-color: #764ba2;
+    box-shadow: 0 0 0 0.2rem rgba(118, 75, 162, 0.25);
+}
+
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1) !important;
+}
+
+.input-group-text {
+    background-color: white;
+    border-right: none;
+}
+
+.form-control {
+    border-left: none;
+}
+
+.form-control:focus {
+    border-left: none;
+}
+</style>
