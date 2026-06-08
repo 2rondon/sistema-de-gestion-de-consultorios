@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Pacientes - Consultorio Médico</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f2f5;
+            padding: 30px;
+            color: #333;
+        }
+
+        /* Encabezado */
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+            padding: 30px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            border-radius: 12px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .header h3 {
+            font-size: 16px;
+            font-weight: normal;
+            margin-bottom: 8px;
+        }
+
+        .fecha {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        /* Fila de cards */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -10px;
+            margin-bottom: 30px;
+        }
+
+        .col-md-3 {
+            flex: 0 0 25%;
+            max-width: 25%;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        /* Cards */
+        .card {
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+        }
+
+        .card-body {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .card h2 {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .mb-0 {
+            margin-bottom: 0;
+        }
+
+        .mb-3 {
+            margin-bottom: 15px;
+        }
+
+        .mb-4 {
+            margin-bottom: 25px;
+        }
+
+        /* Colores de cards */
+        .bg-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .bg-success {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+        .bg-info {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        .bg-warning {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .text-white {
+            color: white;
+        }
+
+        /* Tabla */
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .table-header h3 {
+            font-size: 18px;
+            color: #1e3c72;
+        }
+
+        .table-badge {
+            background: #2a5298;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .pacientes-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .pacientes-table th {
+            background: #1e3c72;
+            color: white;
+            padding: 12px 10px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .pacientes-table td {
+            padding: 10px;
+            border-bottom: 1px solid #e0e0e0;
+            text-align: center;
+        }
+
+        .pacientes-table tr:hover {
+            background-color: #f0f4f8;
+        }
+
+        .paciente-nombre {
+            text-align: left;
+            font-weight: 600;
+            color: #1e3c72;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+
+        .total-citas {
+            font-weight: bold;
+            color: #2a5298;
+        }
+
+        /* Badges */
+        .receta-si {
+            background: #27ae60;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            display: inline-block;
+        }
+
+        .receta-no {
+            background: #e74c3c;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            display: inline-block;
+        }
+
+        /* Footer */
+        .footer-card {
+            text-align: center;
+            padding: 15px;
+            background: #ecf0f1;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .footer-card p {
+            margin: 5px 0;
+            font-size: 10px;
+            color: #7f8c8d;
+        }
+
+        /* Botones */
+        .acciones {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn-print, .btn-close {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            margin: 0 8px;
+        }
+
+        .btn-print {
+            background: #27ae60;
+            color: white;
+        }
+
+        .btn-close {
+            background: #e74c3c;
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            .col-md-3 {
+                flex: 0 0 50%;
+                max-width: 50%;
+                margin-bottom: 15px;
+            }
+            .pacientes-table th, .pacientes-table td {
+                font-size: 10px;
+                padding: 6px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .col-md-3 {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+        }
+
+        /* Impresión */
+        @media print {
+            .acciones {
+                display: none;
+            }
+            body {
+                background: white;
+                padding: 15px;
+            }
+            .card, .table-container {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+            .bg-primary, .bg-success, .bg-info, .bg-warning {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>🏥 CONSULTORIO MÉDICO</h1>
+        <h3>Reporte de Pacientes</h3>
+        <div class="fecha">📅 Fecha de generación: <%= fecha %></div>
+    </div>
+
+    
+
+    <!-- Tabla de Pacientes -->
+      <div class="row">
+    <div class="col-md-12 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">📋 LISTA DETALLADA DE PACIENTES</h5>
+                <div class="table-badge">Total: <%= pacientes.length %> pacientes</div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover" id="tablaPacientesDetallada">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Paciente</th>
+                                <th>Cédula</th>
+                                <th>Teléfono</th>
+                                
+                                <th>Total Citas</th>
+                                <th>Completadas</th>
+                                <th>Pendientes</th>
+                                <th>Receta</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(var i = 0; i < pacientes.length; i++) { %>
+                            <tr>
+                                <td><%= i + 1 %></td>
+                                <td><%= pacientes[i].nombre %> <%= pacientes[i].apellido %></td>
+                                <td><%= pacientes[i].cedula %></td>
+                                <td><%= pacientes[i].telefono || '-' %></td>
+                                <td><span><%= pacientes[i].total_citas || 0 %></span></td>
+                                <td><%= pacientes[i].citas_completadas || 0 %></td>
+                                <td><%= pacientes[i].citas_pendientes || 0 %></td>
+                                <td>
+                                    <% if(pacientes[i].total_recetas > 0) { %>
+                                        <span> Sí (<%= pacientes[i].total_recetas %>)</span>
+                                    <% } else { %>
+                                        <span> No</span>
+                                    <% } %>
+                                </td>
+                            </tr>
+                            <% } %>
+                            <% if(pacientes.length === 0) { %>
+                            <tr>
+                                <td colspan="9" class="text-center">No hay pacientes registrados en el sistema</td>
+                            </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- Footer -->
+    <br><br>
+    <!-- Botones -->
+    <div class="acciones">
+        <button onclick="window.print()" class="btn-print">🖨️ Imprimir / Guardar como PDF</button>
+        <button onclick="window.close()" class="btn-close"> Cerrar </button>
+    </div>
+
+</body>
+</html>
