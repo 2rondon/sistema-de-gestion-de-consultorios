@@ -1,0 +1,345 @@
+.card-stats {
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+.card-stats:hover {
+    transform: translateY(-5px);
+}
+
+.gradient-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.gradient-success {
+    background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+}
+
+.gradient-warning {
+    background: linear-gradient(135deg, #fccb90 0%, #d57eeb 100%);
+}
+
+.gradient-info {
+    background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+}
+
+.stats-icon {
+    font-size: 3rem;
+    opacity: 0.3;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+}
+
+.chart-container {
+    position: relative;
+    height: 300px;
+    margin: 20px 0;
+}
+
+/* Resumen de Estadísticas - Estilos mejorados */
+.stats-container {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.stats-title {
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.stat-item {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 12px;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.2s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.stat-icon {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 11px;
+    color: #666;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Table Header */
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 15px;
+    padding: 0 5px;
+}
+
+.table-header h3 {
+    font-size: 16px;
+    color: #333;
+    margin: 0;
+}
+
+.table-info {
+    font-size: 11px;
+    color: #666;
+    background: #f0f0f0;
+    padding: 4px 10px;
+    border-radius: 15px;
+}
+
+/* Tabla Rediseñada */
+.pacientes-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 11px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.pacientes-table thead th {
+    background: #2c3e50;
+    color: white;
+    padding: 12px 6px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.pacientes-table thead th:first-child {
+    border-top-left-radius: 8px;
+}
+
+.pacientes-table thead th:last-child {
+    border-top-right-radius: 8px;
+}
+
+.pacientes-table tbody td {
+    padding: 10px 6px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.fila-par {
+    background-color: #ffffff;
+}
+
+.fila-impar {
+    background-color: #f8f9fa;
+}
+
+.pacientes-table tbody tr:hover {
+    background-color: #e3f2fd;
+    transition: background-color 0.2s;
+}
+
+.paciente-nombre {
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+.numero-citas {
+    font-weight: bold;
+    font-size: 13px;
+    color: #2c3e50;
+}
+
+/* Badges mejorados */
+.badge-success-pill {
+    display: inline-block;
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: bold;
+    min-width: 35px;
+}
+
+.badge-warning-pill {
+    display: inline-block;
+    background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+    color: #333;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: bold;
+    min-width: 35px;
+}
+
+.badge-info-pill {
+    display: inline-block;
+    background: linear-gradient(135deg, #17a2b8 0%, #0dcaf0 100%);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: bold;
+    min-width: 35px;
+}
+
+.badge-danger-pill {
+    display: inline-block;
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: bold;
+    min-width: 35px;
+}
+
+.badge-neutral {
+    display: inline-block;
+    background: #e9ecef;
+    color: #6c757d;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    min-width: 35px;
+}
+
+.receta-si {
+    display: inline-block;
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.receta-no {
+    display: inline-block;
+    background: #6c757d;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+}
+
+.receta-icon {
+    font-weight: bold;
+    margin-right: 3px;
+}
+
+/* Empty state */
+.empty-message {
+    text-align: center;
+    padding: 40px !important;
+}
+
+.empty-state {
+    text-align: center;
+}
+
+.empty-icon {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.empty-state p {
+    color: #999;
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Footer */
+.footer {
+    margin-top: 40px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.footer-content {
+    text-align: center;
+}
+
+.footer-content p {
+    margin: 5px 0;
+    font-size: 9px;
+    color: #888;
+}
+
+/* Botones */
+.acciones {
+    text-align: center;
+    margin-top: 30px;
+    padding: 15px;
+}
+
+.btn-print, .btn-close {
+    padding: 10px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 0 8px;
+    transition: all 0.2s;
+}
+
+.btn-print {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+}
+
+.btn-print:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+.btn-close {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: white;
+}
+
+.btn-close:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+/* Text alignment */
+.text-center {
+    text-align: center;
+}
+
+/* Column widths */
+.col-num { width: 5%; }
+.col-nombre { width: 16%; }
+.col-cedula { width: 10%; }
+.col-telefono { width: 10%; }
+.col-email { width: 15%; }
+.col-total { width: 7%; }
+.col-completadas { width: 8%; }
+.col-pendientes { width: 8%; }
+.col-confirmadas { width: 8%; }
+.col-canceladas { width: 8%; }
+.col-receta { width: 8%; }
