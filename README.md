@@ -9,3 +9,7 @@ LOGIN
 PANEL PRINCIPAL
 
 ![image alt](https://github.com/2rondon/sistema-de-gestion-de-consultorios/blob/16a9055524dd9939f0e1249dd9d6056c3dbd9fa6/panel.png)
+
+
+Usuario: admin@consultorio.com
+Contraseña: admin123
