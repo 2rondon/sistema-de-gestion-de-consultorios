@@ -1,42 +1,177 @@
-<div class="row justify-content-center mt-5">
+<div class="row justify-content-center align-items-center" style="min-height: 100vh;">
     <div class="col-md-6 col-lg-5">
-        <div class="card shadow">
-            <div class="card-header bg-success text-white">
-                <h4 class="mb-0"><i class="bi bi-person-plus"></i> Registrarse</h4>
-            </div>
-            <div class="card-body">
+        <div class="card border-0 shadow-lg rounded-4">
+            <div class="card-body p-5">
+                <div class="text-center mb-4">
+                    <div class="bg-success bg-gradient rounded-circle d-inline-flex p-3 mb-3 shadow-sm">
+                        <i class="bi bi-person-plus fs-1 text-white"></i>
+                    </div>
+                    <h3 class="fw-bold">Crear Cuenta</h3>
+                    <p class="text-muted">Regístrate para acceder al sistema</p>
+                </div>
+                
                 <% if (typeof error !== 'undefined' && error) { %>
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <%= error %>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <div class="alert alert-danger rounded-3" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill me-1"></i> <%= error %>
                     </div>
                 <% } %>
                 
                 <form action="/auth/register" method="POST">
                     <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre Completo</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                        <label class="form-label fw-semibold">
+                            <i class="bi bi-person-fill me-1"></i> Nombre Completo
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0">
+                                <i class="bi bi-person"></i>
+                            </span>
+                            <input type="text" name="nombre" class="form-control border-start-0" 
+                                   placeholder="Ej: Juan Pérez" required autofocus>
+                        </div>
                     </div>
+                    
                     <div class="mb-3">
-                        <label for="email" class="form-label">Correo Electrónico</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
+                        <label class="form-label fw-semibold">
+                            <i class="bi bi-envelope-fill me-1"></i> Correo Electrónico
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0">
+                                <i class="bi bi-envelope"></i>
+                            </span>
+                            <input type="email" name="email" class="form-control border-start-0" 
+                                   placeholder="usuario@ejemplo.com" required>
+                        </div>
                     </div>
+                    
                     <div class="mb-3">
-                        <label for="password" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
+                        <label class="form-label fw-semibold">
+                            <i class="bi bi-lock-fill me-1"></i> Contraseña
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0">
+                                <i class="bi bi-key"></i>
+                            </span>
+                            <input type="password" name="password" class="form-control border-start-0" 
+                                   id="password" placeholder="Mínimo 6 caracteres" required>
+                        </div>
+                        <div class="form-text small text-muted mt-1">
+                            <i class="bi bi-info-circle"></i> La contraseña debe tener al menos 6 caracteres
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="confirm_password" class="form-label">Confirmar Contraseña</label>
-                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                    
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">
+                            <i class="bi bi-shield-lock-fill me-1"></i> Confirmar Contraseña
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0">
+                                <i class="bi bi-check-circle"></i>
+                            </span>
+                            <input type="password" name="confirm_password" class="form-control border-start-0" 
+                                   id="confirm_password" placeholder="Repite tu contraseña" required>
+                        </div>
+                        <div id="passwordMatch" class="form-text small mt-1"></div>
                     </div>
-                    <button type="submit" class="btn btn-success w-100">Registrarse</button>
+                    
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" type="checkbox" id="terms" required>
+                        <label class="form-check-label" for="terms">
+                            Acepto los <a href="#" class="text-decoration-none">términos y condiciones</a>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success w-100 py-2 fw-bold rounded-3" 
+                            style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); border: none;">
+                        <i class="bi bi-person-plus me-2"></i> Registrarse
+                    </button>
                 </form>
                 
-                <hr>
-                <p class="text-center mb-0">
-                    ¿Ya tienes cuenta? <a href="/auth/login">Inicia Sesión</a>
-                </p>
+                <div class="text-center mt-4">
+                    <a href="/auth/login" class="text-decoration-none">
+                        <i class="bi bi-box-arrow-in-left"></i> ¿Ya tienes cuenta? Inicia Sesión
+                    </a>
+                </div>
+                
+                <hr class="my-4">
+                
+                <div class="bg-light rounded-3 p-3">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-info-circle-fill text-success me-2 fs-5"></i>
+                        <small class="text-muted">
+                            Al registrarte podrás gestionar pacientes, citas y recetas médicas.
+                        </small>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+// Validación de contraseñas en tiempo real
+document.addEventListener('DOMContentLoaded', function() {
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirm_password');
+    const passwordMatch = document.getElementById('passwordMatch');
+    
+    function validatePassword() {
+        if (password.value !== confirmPassword.value) {
+            passwordMatch.innerHTML = '<i class="bi bi-x-circle"></i> Las contraseñas no coinciden';
+            passwordMatch.style.color = '#dc3545';
+            confirmPassword.style.borderColor = '#dc3545';
+            return false;
+        } else if (confirmPassword.value !== '') {
+            passwordMatch.innerHTML = '<i class="bi bi-check-circle"></i> Las contraseñas coinciden';
+            passwordMatch.style.color = '#28a745';
+            confirmPassword.style.borderColor = '#28a745';
+            return true;
+        }
+        return true;
+    }
+    
+    confirmPassword.addEventListener('keyup', validatePassword);
+    password.addEventListener('keyup', validatePassword);
+});
+</script>
+
+<style>
+.min-vh-100 {
+    min-height: 100vh;
+}
+
+.form-control:focus {
+    border-color: #11998e;
+    box-shadow: 0 0 0 0.2rem rgba(17, 153, 142, 0.25);
+}
+
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1) !important;
+}
+
+.input-group-text {
+    background-color: white;
+    border-right: none;
+}
+
+.form-control {
+    border-left: none;
+}
+
+.form-control:focus {
+    border-left: none;
+}
+
+.btn-success {
+    transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(17, 153, 142, 0.3);
+}
+</style>
